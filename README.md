@@ -1,7 +1,7 @@
 
 ---
 
-## 🧱 Part 1: Flask Application (30 Marks)
+## 🧱 Part 1: Flask Application 
 
 - `GET /` – Displays "Hello, World!".
 - `GET /form` – Shows a form to enter name and age.
@@ -12,7 +12,7 @@ Flask is served on **[http://localhost:5001](http://localhost:5001)**
 
 ---
 
-## 🌐 Part 2: Django Application (40 Marks)
+## 🌐 Part 2: Django Application 
 
 - Homepage displays a list of items (e.g., books).
 - Form on the homepage to add new items.
@@ -24,7 +24,7 @@ Login to admin panel at `/admin`.
 
 ---
 
-## 🐳 Part 3: Docker Compose Setup (30 Marks)
+## 🐳 Part 3: Docker Compose Setup 
 
 ### 📄 Dockerfiles
 - Separate Dockerfiles for both Flask and Django apps.
