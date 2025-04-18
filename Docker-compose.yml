@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  flask_app:
+    build:
+      context: ./flask_app  # Ensure this points to your Flask app directory
+    ports:
+      - "5001:5000"  # Expose Flask app on port 5001 instead of 5000
+    environment:
+      - FLASK_ENV=development
+    networks:
+      - mynetwork
+
+  django_app:
+    build:
+      context: ./bookstore  # Corrected to the 'bookstore' directory for Django
+    ports:
+      - "8001:8000"  # Expose Django app on port 8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=bookstore.settings  # Update with your Django settings module
+    depends_on:
+      - flask_app
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge

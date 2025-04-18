@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <!-- Bootstrap 5 CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #f0f8ff; /* Soft light blue */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            margin-bottom: 30px;
+            background-color: #2c3e50; /* Dark Slate Blue */
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #ecf0f1 !important; /* Light Gray */
+        }
+        .navbar-toggler-icon {
+            background-color: #ecf0f1;
+        }
+        .navbar-nav .nav-link {
+            color: #ecf0f1 !important;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #f39c12 !important; /* Accent color */
+        }
+
+        /* Card and Button Styling */
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            background-color: #ffffff; /* White */
+        }
+        .card-header {
+            background-color: #2980b9; /* Ocean Blue */
+            color: white;
+            font-weight: bold;
+            border-radius: 12px 12px 0 0;
+        }
+        .card-body {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .btn-primary {
+            background-color: #3498db; /* Bright Blue */
+            border: none;
+            border-radius: 6px;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9; /* Darker Blue */
+        }
+
+        .book-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Input and Label Styles */
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #2980b9; /* Ocean Blue */
+            padding: 12px 15px;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #2c3e50; /* Dark Slate Blue */
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #2c3e50; /* Dark Slate Blue */
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* Heading and Text Colors */
+        .book-list-heading {
+            color: #34495e; /* Grayish Blue */
+        }
+
+        /* Alerts */
+        .alert-info {
+            background-color: #ecf0f1;
+            color: #34495e;
+            border: 1px solid #bdc3c7;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header with Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Bookstore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">Admin Panel</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4 book-list-heading">Book List</h1>
+        
+        <!-- Book List -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for book in books %}
+                <div class="col">
+                    <div class="card book-card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ book.title }}</h5>
+                            <p class="card-text text-center">by <strong>{{ book.author }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info text-center">
+                        No books available.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Add Book Form -->
+        <div class="card mt-5 shadow-sm">
+            <div class="card-header">
+                <h4>Add a New Book</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_title" class="form-label">Book Title</label>
+                        <input type="text" name="title" id="id_title" class="form-control" value="{{ form.title.value }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_author" class="form-label">Author</label>
+                        <input type="text" name="author" id="id_author" class="form-control" value="{{ form.author.value }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Add Book</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Bookstore | Designed by Your Name</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
